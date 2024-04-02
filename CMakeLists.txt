@@ -21,3 +21,8 @@ ADD_LIBRARY(BeamGeometry ${BeamGeo_SOURCES})
 IF(TARGET FFaLib)
   TARGET_LINK_LIBRARIES(BeamGeometry FFaLib)
 ENDIF(TARGET FFaLib)
+
+IF(NOT IFEM_COMMON_APP_BUILD AND NOT TARGET testapps)
+  MESSAGE(STATUS "Adding dummy testapps target for project ${CMAKE_PROJECT_NAME}")
+  ADD_CUSTOM_TARGET(testapps echo "No apps here" DEPENDS BeamGeometry)
+ENDIF(NOT IFEM_COMMON_APP_BUILD AND NOT TARGET testapps)
